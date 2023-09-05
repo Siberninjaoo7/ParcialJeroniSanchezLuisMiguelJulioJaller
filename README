@@ -1,0 +1,32 @@
+Parcial de Jeronimo Sanchez, Luis Miguel Garcia y Julio Jaller
+El codigo cumple las siguiente s funciones:
+1. Aplicación que solicite los valores de dos puntos en un plano cartesiano y retorne la pendiente y el
+intercepto con el eje y de la recta que pasa por esos dos puntos (realice un control de las
+indeterminaciones matemáticas).
+2. Aplicación para calcular el promedio y la desviación estándar de un conjunto de N temperaturas
+introducidos por consola. Para esto es necesario solicitar al usuario el número N de temperaturas y
+paso siguiente, cada uno de los valores.
+3. Aplicación que permita generar colores en un LED RGB con base en el código de color RGB.
+
+La tarjeta selecciona la funcion mediante el teclado siendo el uno la primera funcion, el dos la segunda y el tres la tercera
+La funcion que se menciona se compone mediante dos ciclos For anidados de forma que se recorre la matriz del teclado, las filas son DigitalInts(Correspondientes a las entradas D2,D3,D4,D5) por lo que envian una señal; lo que se hace en el primer ciclo For es 
+Encender una por cada ciclo, en siguiente For lo que se hace es mirar cual DigitlaOut correspondiente a las columnas( correspondientes a las entradas D6,D7,D8) cierran el circuito, verifcacion realizada con un If que si entra a este cambia los valores 
+De dos variables X y Y
+Basicamente creamos dos variables X y Y para leer la posicion en la que se presiona el botos con elses y ifs que comparan los valores para asegurarse que se haya seleccionado una funcion, esta forma que se implemento permite agregar mas funciones.
+
+Para la primera funcion utilizamos la funcion anteriomente mencionada para solicitar valores por teclado solo que en esta no cambiamos dentro del If las variables X y Y en cambio se cambian los valores de la primera coordenada uno por uno (un metodo para cada componente) 
+y luego mediante el mismo metrodo se cambia los valores de la segunda de la misma manera para tener la informacion necesaria para realizar los calculos matematicos(pendiente de la recta e intercepto don el eje Y)
+
+Para la seunda funcion solicitamos un valor para N (el numero de temperaturas) mediante el mismo metodo anteriormente mencionado seguido a esto entramos a un ciclo For para pedir las N temperaturas, que se piden mediante el mismo metodo pero se guanrdan en una misma varible
+Como nos piden el promedio y la desviacion estadar antes de salir del primer cilco se hacne dos sumatorias una para el promedio y otra para la deviacion estandar, luego de salir del ciclo se hacen los calculos y se imprimen
+
+Para la tercera funcion se usa exactamente el mismo metodo que se uso en las anteriores funciones para pedir por teclado los datos, solo que en este se agregan unos contadores para aceptar numeros de mas de un digito (debido a falta de tiempo falto ingresar los numero al 
+Revez primero unidades, decenas y centenas) luego se obtener los valores se divide entre 255 para obtener un valor entre cero y uno correspondiente a la frecuencia de los LEDS, luego de esto se llama a los LEDs para cambiar su color
+Por ultimo se pregunta al usuario si desea mostrar otro color
+
+Problemas:
+El metodo que se uso para pedir datos por teclado en la mayoria de implementeaciones solo acepta un digito
+En el tercer metodo como se menciono anteriormente se tenia que ingresar los numero al revez
+
+Aclaraciones:
+No sabemos si tenemos mas problemas debido que no se probo el codigo terminado, solo se probo una version del tercer metodo
