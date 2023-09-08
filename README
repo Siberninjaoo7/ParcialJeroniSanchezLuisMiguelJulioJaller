@@ -1,5 +1,8 @@
-Parcial de Jeronimo Sanchez, Luis Miguel Garcia y Julio Jaller
-El codigo cumple las siguiente s funciones:
+Parcial 
+
+Autores: Jeronimo Sanchez, Luis Miguel Garcia y Julio Jaller
+
+El codigo cumple las siguientes funciones:
 1. Aplicación que solicite los valores de dos puntos en un plano cartesiano y retorne la pendiente y el
 intercepto con el eje y de la recta que pasa por esos dos puntos (realice un control de las
 indeterminaciones matemáticas).
@@ -8,25 +11,343 @@ introducidos por consola. Para esto es necesario solicitar al usuario el número
 paso siguiente, cada uno de los valores.
 3. Aplicación que permita generar colores en un LED RGB con base en el código de color RGB.
 
-La tarjeta selecciona la funcion mediante el teclado siendo el uno la primera funcion, el dos la segunda y el tres la tercera
-La funcion que se menciona se compone mediante dos ciclos For anidados de forma que se recorre la matriz del teclado, las filas son DigitalInts(Correspondientes a las entradas D2,D3,D4,D5) por lo que envian una señal; lo que se hace en el primer ciclo For es 
-Encender una por cada ciclo, en siguiente For lo que se hace es mirar cual DigitlaOut correspondiente a las columnas( correspondientes a las entradas D6,D7,D8) cierran el circuito, verifcacion realizada con un If que si entra a este cambia los valores 
-De dos variables X y Y
-Basicamente creamos dos variables X y Y para leer la posicion en la que se presiona el botos con elses y ifs que comparan los valores para asegurarse que se haya seleccionado una funcion, esta forma que se implemento permite agregar mas funciones.
+Se selecciona la funcion mediante el teclado siendo el uno la primera funcion, el dos la segunda y el tres la tercera
+Para poder seleccionar por el teclado se tiene una funcion que se compone de un ciclo While y dos ciclos For anidados de forma que se recorre la matriz 
+del teclado, las filas son DigitalInts (Correspondientes a las entradas D2,D3,D4 y D5) por lo que envian una señal, en el primer ciclo For se enciende 
+un y solo un DigitalInt por cada ciclo; en siguiente For lo que se hace es mirar cual DigitlaOut correspondiente a las columnas (entradas D6,D7 y D8) 
+cierran el circuito, verifcacion realizada con un If dentro de dicho For que si entra a este cambia los valores de dos variables xFuncion y yFuncion que 
+indican que posicion del teclado se esta presionando y en base a esta posición seleccionar la funcion luego de que se sale del ciclo, para salir del ciclo a 
+la vez que se cambian las variables xFuncion y yFuncion se cambia por false una variable booleana validadorPrincipal para que no vuelva a recorrer el 
+y entre a la funcion seleccionada.
 
-Para la primera funcion utilizamos la funcion anteriomente mencionada para solicitar valores por teclado solo que en esta no cambiamos dentro del If las variables X y Y en cambio se cambian los valores de la primera coordenada uno por uno (un metodo para cada componente) 
-y luego mediante el mismo metrodo se cambia los valores de la segunda de la misma manera para tener la informacion necesaria para realizar los calculos matematicos(pendiente de la recta e intercepto don el eje Y)
+            bool validadorPrincipal = true;
+            cout<<"Selecione la funcion deseada con 1, 2 o 3"<<endl;
+            while(validadorPrincipal){
+                for(int i =0; i<3; i++){
+                    arregloCol[i] =0;
+                    for(int j = 0; j<4;j++){
+                        if(!arregloFil[j]){
+                            xFuncion = i;
+                            yFuncion = j;
+                            validadorPrincipal=false;
+                            while(!arregloFil[j]);
+                            break;
+                        }
+                    }
+                    arregloCol[i] =1;
+                }
+            }
 
-Para la seunda funcion solicitamos un valor para N (el numero de temperaturas) mediante el mismo metodo anteriormente mencionado seguido a esto entramos a un ciclo For para pedir las N temperaturas, que se piden mediante el mismo metodo pero se guanrdan en una misma varible
-Como nos piden el promedio y la desviacion estadar antes de salir del primer cilco se hacne dos sumatorias una para el promedio y otra para la deviacion estandar, luego de salir del ciclo se hacen los calculos y se imprimen
+Para poder entrar a la función seleccionada se hace una serie de comparaciones con unos Else If que comparan las variables xFuncion y yFuncion anteriormente 
+mencionados, si no cumplen con los valores esperados se vuelve a entrar a la funcion anteriormente mencionada para seleccionar por teclado.
 
-Para la tercera funcion se usa exactamente el mismo metodo que se uso en las anteriores funciones para pedir por teclado los datos, solo que en este se agregan unos contadores para aceptar numeros de mas de un digito (debido a falta de tiempo falto ingresar los numero al 
-Revez primero unidades, decenas y centenas) luego se obtener los valores se divide entre 255 para obtener un valor entre cero y uno correspondiente a la frecuencia de los LEDS, luego de esto se llama a los LEDs para cambiar su color
-Por ultimo se pregunta al usuario si desea mostrar otro color
+            if(xFuncion == 0 && yFuncion == 0){
+                
+            }else if(xFuncion == 1 && yFuncion ==0){
+                
+            }else if (xFuncion == 2 && yFuncion == 0){
+
+            }
+
+Para la primera funcion utilizamos la funcion anteriomente mencionada para solicitar valores por teclado solo que en esta dentro del If las 
+se le suma a una variable x1, y1, x2 y y2, para cada variable hacemos la funcion una vez, en esta funcion tenemos un counter que corresponder al exponente
+del 10 para ir agregando decenas, centenas, etc; el problema es que como lo implementamos hay que meter los numeros alrevez de como estamos acostumbrados;
+luego de ingresar todos los valores hacemos las operaciones correspondientes para poder imprimir en la consola lo que nos piden, la pendiente y el 
+intercepto con el eje y.
+
+                cout<<"Primer funcion"<<endl;
+                double x1 =0,y1=0,x2=0,y2=0;
+                int counter =0;
+
+                cout<<"Ingrese la coordenada X del primer punto "<<endl;
+                bool validador= true;
+                while(validador){
+                    for(int i =0; i<3; i++){
+                    arregloCol[i] =0;
+                        for(int j = 0; j<4;j++){
+                            if(!arregloFil[j]){
+                                x1 += teclado[j][i]*(pow(10,counter));
+                                counter++;
+                                while(!arregloFil[j]){
+
+                                }
+                                if(i == 2 && j == 3){
+                                    validador  = false;
+                                    break;
+                                }   
+                            }
+                        }
+                        arregloCol[i] =1;
+                    }
+                }
+                counter=0;
+                validador = true;
+                cout<<"La coordenada X1 ingresada es "<<x1<<endl;
+                cout<<"Ingrese la coordenada Y del primer punto "<<endl;
+                while(validador){
+                    for(int i =0; i<3; i++){
+                        arregloCol[i] =0;
+                        for(int j = 0; j<4;j++){
+                            if(!arregloFil[j]){
+                                y1 += teclado[j][i]*(pow(10,counter));
+                                counter++;
+                                while(!arregloFil[j]){
+
+                                }
+                                if(i == 2 && j == 3){
+                                    validador = false;
+                                    break;  
+                                }
+                            }
+                        }
+                        arregloCol[i] =1;
+                    }
+                }
+                validador=true;
+                counter = 0;
+                cout<<"La coordenada de Y1 ingresada es "<<y1<<endl;
+                cout<<"Ingrese la coordenada X del segundo punto "<<endl;
+                while(validador){
+                    for(int i =0; i<3; i++){
+                        arregloCol[i] =0;
+                        for(int j = 0; j<4;j++){
+                            if(!arregloFil[j]){
+                                x2 += teclado[j][i]*(pow(10,counter));
+                                counter++;
+                                while(!arregloFil[j]){
+
+                                }
+                                if(i == 2 && j == 3){
+                                    validador  = false;
+                                    break;
+                                } 
+                            }
+                        }
+                        arregloCol[i] =1;   
+                    }
+                }
+                validador = true;
+                counter =0;
+                cout<<"La coordenada de X2 ingresada es "<<x2<<endl;
+                cout<<"Ingrese la coordenada Y del segundo punto "<<endl;
+                while(validador){
+                    for(int i =0; i<3; i++){
+                        arregloCol[i] =0;
+                        for(int j = 0; j<4;j++){
+                            if(!arregloFil[j]){
+                                y2 += teclado[j][i]*(pow(10,counter));
+                                counter++;
+                                while(!arregloFil[j]){
+
+                                }
+                                if(i == 2 && j == 3){
+                                    validador = false;
+                                    break;  
+                                }
+                            }
+                        }
+                        arregloCol[i] =1;
+                    }
+                }
+                cout<<"La coordenada de Y2 ingresada es "<<y2<<endl;
+                if(x1 ==x2 && y1 ==y2){
+                    cout<<"Los puntos son iguales la pendiente es indefinida"<<endl;
+                }else if(x2-x1 == 0){
+                    cout<<"La pendiente e indefinida por division entre cero"<<endl;
+                }else{
+                    double pendiente = (y2-y1)/(x2-x1);
+                    double interceptoY = y1-pendiente*x1;
+                    cout<<"La pendiente es "<<pendiente<<endl;
+                    cout<<"El intercepto con el eje Y es "<<interceptoY<<endl;
+                }
+
+Para la seunda funcion solicitamos un valor para N (la cantidad de temperaturas) mediante el mismo metodo anteriormente mencionado seguido a esto entramos 
+a un ciclo For para pedir las N temperaturas, que se piden mediante el mismo metodo pero se guardan en una misma varible temp; como nos piden el promedio y 
+la desviacion estadar antes de salir del cilco For se suma la variable obtenida a dos sumatorias una para el promedio y otra para la deviacion estandar, 
+luego de salir del ciclo se hacen los calculos y se imprimen por consola el promedio y la desviación estandar.
+
+                cout<<"Segunda funcion"<<endl;
+                double n =0;
+                double temp =0;
+                double suma =0.0;
+                double sumaCuadrados = 0.0;
+                bool validador = true;
+                int counter =0;
+                cout<<"Ingrese la cantidad de temperaturas"<<endl;
+                while(validador){
+                    for(int i =0; i<3; i++){
+                        arregloCol[i] =0;
+                        for(int j = 0; j<4;j++){
+                            if(!arregloFil[j]){
+                                n = n + teclado[j][i]*(pow(10,counter));
+                                counter++;
+                                while(!arregloFil[j]){
+
+                                }
+                                if(i == 2 && j == 3){
+                                    validador = false;
+                                    break;  
+                                }
+                            }
+                        }
+                        arregloCol[i] =1;
+                    }
+                }
+                cout<<n<<endl;
+                validador=true;
+                counter=0;
+                for(int u = 0; u<n;u++){
+                    temp=0;
+                    cout<<"Ingrese la temperatura "<<u<<" :"<<endl;
+                    while(validador){
+                        for(int i =0; i<3; i++){
+                            arregloCol[i] =0;
+                            for(int j = 0; j<4;j++){
+                                if(!arregloFil[j]){
+                                    temp += teclado[j][i]*(pow(10,counter));
+                                    counter++;
+                                    while(!arregloFil[j]){
+
+                                    }
+                                    if(i == 2 && j == 3){
+                                        validador = false;
+                                        break;  
+                                    }
+                                }
+                            }
+                            arregloCol[i] =1;
+                        }
+                    }
+                    cout<<"La temperatura ingresada es "<<temp<<endl;
+                    validador=true;
+                    counter=0;
+                    suma += temp;
+                    sumaCuadrados += temp*temp;
+                }
+                double promedio = suma/n;
+                double desviacionStandar = sqrt((sumaCuadrados/n)-promedio*promedio);
+                cout<<"El promedio de las temperaturas es "<< promedio<<endl;
+                cout<<"La desviacion estandar es "<< desviacionStandar<<endl;
+
+Para la tercera funcion se usa exactamente el mismo metodo que se uso en las anteriores funciones para pedir por teclado los datos, hacemos la funcion 
+tres veces una por cada color Rojo, Verde y Azul, luego de obtener los valores se divide entre 255 para obtener un valor entre cero y uno y el valor 
+obtenido se le resta a uno, valor correspondiente a la frecuencia de los LEDS, luego de esto se llama a los LEDs para cambiar su frecuencia, y por ultimo 
+se pregunta al usuario si desea mostrar otro color, si pressiona el 1 del teclado puede meter otro color y si presiona el cero del teclado sale de la 
+función y puede seleccionar otra.
+
+                cout<<"Tercera funcion"<<endl;
+                int validador = 1;
+                while (validador == 1) {
+                    int frecuenciaR;
+                    int frecuenciaG;
+                    int frecuenciaB;
+                    int counter = 0;
+                    int R = 0;
+                    int G = 0;
+                    int B = 0;
+                    bool validadorRGB = true;
+                    cout<<"Ingrese el valor (entre 0 y 255) para el rojo"<<endl;
+                    while(validadorRGB){
+                        for(int i =0; i<3; i++){
+                            arregloCol[i] =0;
+                            for(int j = 0; j<4;j++){
+                                if(!arregloFil[j]){
+                                    R += teclado[j][i]*(pow(10,counter));
+                                    counter++;
+                                    while(!arregloFil[j]){
+
+                                    }
+                                    if(i == 2 && j == 3){
+                                        validadorRGB = false;
+                                        break;  
+                                    }
+                                }
+                            }
+                            arregloCol[i] =1;
+                        }
+                    }
+                    cout<<"Valor ingresado para el rojo: "<<R<<endl;
+                    counter = 0;
+                    validadorRGB = true;
+                    cout<<"Ingrese el valor (entre 0 y 255) para el verde"<<endl;
+                    while(validadorRGB){
+                        for(int i =0; i<3; i++){
+                            arregloCol[i] =0;
+                            for(int j = 0; j<4;j++){
+                                if(!arregloFil[j]){
+                                    G += teclado[j][i]*(pow(10,counter));
+                                    counter++;
+                                    while(!arregloFil[j]){
+
+                                    }
+                                    if(i == 2 && j == 3){
+                                        validadorRGB = false;
+                                        break;  
+                                    }
+                                }
+                            }
+                            arregloCol[i] =1;
+                        }
+                    }
+                    cout<<"Valor ingresado para el verde: "<<G<<endl;
+                    counter = 0;
+                    validadorRGB = true;
+                    cout<<"Ingrese el valor (entre 0 y 255) para el azul"<<endl;
+                    while(validadorRGB){
+                        for(int i =0; i<3; i++){
+                            arregloCol[i] =0;
+                            for(int j = 0; j<4;j++){
+                                if(!arregloFil[j]){
+                                    B += teclado[j][i]*(pow(10,counter));
+                                    counter++;
+                                    while(!arregloFil[j]){
+
+                                    }
+                                    if(i == 2 && j == 3){
+                                        validadorRGB = false;
+                                        break;  
+                                    }
+                                }
+                            }
+                            arregloCol[i] =1;
+                        }
+                    }
+                    cout<<"Valor ingresado para el azul: "<<B<<endl;
+                    validadorRGB = true;
+                    frecuenciaR = 1-R/255;
+                    frecuenciaG = 1-G/255;
+                    frecuenciaB = 1-B/255;
+                    ledR.write(frecuenciaR);
+                    ledG.write(frecuenciaG);
+                    ledB.write(frecuenciaB);
+                    ThisThread::sleep_for(BLINKING_RATE);
+                    cout<<"Desea otro color (0 para salir, 1 para continuar)"<<endl;
+                    while(validadorRGB){
+                        for(int i =0; i<3; i++){
+                            arregloCol[i] =0;
+                            for(int j = 0; j<4;j++){
+                                if(!arregloFil[j]){
+                                    if(i == 0 && j == 0){
+                                        validador = 1;
+                                        validadorRGB = false;
+                                        break;  
+                                    }else if(i == 1 && j == 3){
+                                        validador = 0;
+                                        validadorRGB = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            arregloCol[i] =1;
+                        }
+                    }
+                }
+            }
+
+Para poder ingresar a otra función sin tener que reiniciar el codigo, despues de cada función tenemos que reiniciar las variables xFuncion y yFuncion.
+
+                xFuncion = -1;
+                yFuncion = -1;
 
 Problemas:
-El metodo que se uso para pedir datos por teclado en la mayoria de implementeaciones solo acepta un digito
-En el tercer metodo como se menciono anteriormente se tenia que ingresar los numero al revez
-
-Aclaraciones:
-No sabemos si tenemos mas problemas debido que no se probo el codigo terminado, solo se probo una version del tercer metodo
+En todas las tres funciones se tiene que ingresar los numeros al revez primero unidades, luego decenas, centenas y así sucesivamente
